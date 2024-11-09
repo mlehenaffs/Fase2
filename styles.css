@@ -1,0 +1,65 @@
+/* Agregar bordes a la tabla */
+#task-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#task-table th, #task-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Estilo para la fila del encabezado con fondo gris */
+#task-table th {
+    background-color: #f2f2f2;
+}
+
+/* Estilo del botón de selección de actualización */
+.select-update-button {
+    background-color: #28a745; /* Botón verde */
+    color: white;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Estilo de los botones */
+.button {
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#update-task-form input, #update-task-form select, #update-task-form textarea {
+    width: 100%;
+    padding: 6px;
+    margin: 5px 0;
+}
+
+/* Ocultar el formulario de actualización al inicio */
+#update-task-form {
+    display: none;
+}
+
+/* Ocultar campos que no se deben mostrar */
+#update-task-form input[readonly], #update-task-form textarea[readonly] {
+    display: none;
+}
+
+/* Filtro de estatus */
+#status-filter {
+    margin-top: 20px;
+    padding: 6px;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el título y el filtro */
+    margin-top: 20px;
+}
+
+.filter-container label {
+    margin-right: 10px;
+}

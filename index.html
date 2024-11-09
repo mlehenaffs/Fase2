@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación Web</title>
+    <style>
+        /* Agregar bordes a la tabla */
+        #task-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #task-table th, #task-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        /* Estilo para la fila del encabezado con fondo gris */
+        #task-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Estilo del botón de selección de actualización */
+        .select-update-button {
+            background-color: #28a745; /* Botón verde */
+            color: white;
+            padding: 6px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* Estilo de los botones */
+        .button {
+            padding: 6px 12px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #update-task-form input, #update-task-form select, #update-task-form textarea {
+            width: 100%;
+            padding: 6px;
+            margin: 5px 0;
+        }
+
+        /* Ocultar el formulario de actualización al inicio */
+        #update-task-form {
+            display: none;
+        }
+
+        /* Ocultar campos que no se deben mostrar */
+        #update-task-form input[readonly], #update-task-form textarea[readonly] {
+            display: none;
+        }
+
+        /* Estilo para los comentarios con viñetas */
+        #update-task-form #new-comment {
+            white-space: pre-line;
+        }
+
+        .comment-list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Inicio de Sesión</h2>
+    <div id="login-section">
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="validateLogin()">Ingresar</button>
+        <p id="error-message" style="color: red;"></p>
+    </div>
+
+    <div id="main-section" style="display:none;">
+        <h3>Bienvenido, <span id="user-name"></span></h3>
+        <button onclick="logout()">Cerrar Sesión</button>
+        
+        <h3>Registrar Tarea</h3>
+        <form id="task-form">
+            <input type="text" id="task-id" placeholder="Código de Tarea">
+            <input type="text" id="task-title" placeholder="Título">
+            <textarea id="task-desc" placeholder="Descripción"></textarea>
+            <input type="date" id="task-start-date">
+            <input type="text" id="task-client" placeholder="Cliente">
+            <input type="text" id="task-project-id" placeholder="ID del Proyecto">
+            <textarea id="task-comments" placeholder="Comentarios"></textarea>
+            <input type="text" id="task-status" value="Por hacer" readonly>
+            <button type="button" onclick="addTask()">Agregar Tarea</button>
+        </form>
+
+        <h3>Lista de Tareas</h3>
+        <div class="filter-container">
+            <label for="status-filter">Filtrar por Estatus:</label>
+            <select id="status-filter" onchange="filterTasks()">
+                <option value="">Todos</option>
+                <option value="Por hacer">Por hacer</option>
+                <option value="En progreso">En progreso</option>
+                <option value="Rechazado">Rechazado</option>
+                <option value="Cancelado">Cancelado</option>
+                <option value="Cerrado">Cerrado</option>
+                <option value="En pruebas de calidad">En pruebas de calidad</option>
+                <option value="En validación por el usuario">En validación por el usuario</option>
+                <option value="En proceso de liberación">En proceso de liberación</option>
+            </select>
+        </div>
+        <table id="task-table" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Cliente</th>
+                    <th>ID del Proyecto</th>
+                    <th>Comentarios</th>
+                    <th>Estatus</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <h3>Actualizar Tarea</h3>
+        <form id="update-task-form">
+            <input type="text" id="update-task-id" placeholder="Código de Tarea" readonly>
+            <input type="text" id="update-task-title" placeholder="Título" readonly>
+            <textarea id="update-task-desc" placeholder="Descripción" readonly></textarea>
+            <input type="date" id="update-task-start-date" readonly>
+            <input type="text" id="update-task-client" placeholder="Cliente" readonly>
+            <input type="text" id="update-task-project-id" placeholder="ID del Proyecto" readonly>
+            
+            <!-- Mostrar solo los campos de comentarios y estatus -->
+            <textarea id="new-comment" placeholder="Nuevo comentario"></textarea>
+            <select id="update-task-status">
+                <option value="Por hacer">Por hacer</option>
+                <option value="En progreso">En progreso</option>
+                <option value="Rechazado">Rechazado</option>
+                <option value="Cancelado">Cancelado</option>
+                <option value="Cerrado">Cerrado</option>
+                <option value="En pruebas de calidad">En pruebas de calidad</option>
+                <option value="En validación por el usuario">En validación por el usuario</option>
+                <option value="En proceso de liberación">En proceso de liberación</option>
+            </select>
+            <button type="button" class="button" onclick="updateTask()">Actualizar Tarea</button>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
